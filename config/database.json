@@ -1,0 +1,16 @@
+{
+    "development": {
+      "username": "root",
+      "password": "3971eb1e-f900-4880-b76b-8f4ed8967fa1",
+      "database": "blog",
+      "host": "localhost",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "root",
+      "password": "hero511252519",
+      "database": "blog",
+      "host": "39.108.195.194",
+      "dialect": "mysql"
+    }
+}
