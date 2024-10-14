@@ -1,2 +1,6 @@
 export const FILE = 'file'
 export const FOLDER = 'folder'
+export const DBNAME = 'blog'
+export const DBHOST = '47.94.59.49'
+export const DBUSER = 'root'
+export const DBPORT = '3306'

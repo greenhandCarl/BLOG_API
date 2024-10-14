@@ -9,11 +9,13 @@ import koaHelmet from 'koa-helmet'
 import compose from 'koa-compose'
 import errorHandle from './common/errorHandle'
 import routers from './routes/routers'
-import { JWT_SECRET } from './config'
+import { getEnvMode } from '@/utils/process'
+require('dotenv').config()
 
 const app = new Koa()
 
-const isProdMode = process.env.NODE_ENV === 'production'
+const PORT = getEnvMode() ? 12005 : 3080
+const JWT_SECRET = process.env.JWT_SECRET
 
 const jwt = koaJwt({ secret: JWT_SECRET }).unless({ path: [/^\/static/, /^\/a/] })
 
@@ -35,11 +37,9 @@ const middware = compose([
     jwt
 ])
 
-const port = isProdMode ? 12005 : 3080
-
 app.use(middware)
 app.use(routers())
 
-app.listen(port, () => {
-    console.log(`server is running at port ${port}...`)
+app.listen(PORT, () => {
+    console.log(`server is running at port ${PORT}...`)
 })
