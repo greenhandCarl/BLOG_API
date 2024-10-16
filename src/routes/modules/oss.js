@@ -1,4 +1,4 @@
-import oss from '@/api/Oss'
+import oss from '@/controller/Oss'
 import Router from 'koa-router'
 
 const router = new Router()

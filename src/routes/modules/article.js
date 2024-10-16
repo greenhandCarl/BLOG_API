@@ -1,4 +1,4 @@
-import article from '@/api/Article'
+import article from '@/controller/Article'
 
 const Router = require('koa-router')
 

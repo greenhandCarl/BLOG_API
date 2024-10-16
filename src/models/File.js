@@ -1,14 +1,21 @@
-import { Datatypes, Model } from 'sequelize'
+import { DataTypes, Model } from 'sequelize'
 import sequelize from '../core/db'
 import { FOLDER } from '../const/database'
 import { v4 as uuidv4 } from 'uuid'
 
-const { INTEGER, UUID, UUIDV4, String } = Datatypes
+const { INTEGER, UUID, UUIDV4, STRING } = DataTypes
 
 class File extends Model {
     static async createFile (params) {
-        const { parentId, title, contentId, type } = params
+        const { parentId, title, type } = params
+        if (parentId) {
+            const parentRes = await File.findOne({
+                where: { uuid: parentId }
+            })
+            if (!parentRes) return Promise.reject('not find the parent file')
+        }
         const uuid = uuidv4()
+        const contentId = uuidv4()
         const data = {
             uuid,
             parentId,
@@ -41,11 +48,11 @@ File.init(
             defaultValue: null
         },
         title: {
-            type: String,
+            type: STRING,
             defaultValue: ''
         },
         type: {
-            type: String,
+            type: STRING,
             defaultValue: FOLDER
         },
         deleted: {
